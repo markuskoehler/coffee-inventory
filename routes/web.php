@@ -20,8 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resources([
-	'coffee' => \App\Http\Controllers\CoffeeController::class,
-	'images' => \App\Http\Controllers\ImageController::class,
-	'locations' => \App\Http\Controllers\LocationController::class,
-	'machines' => \App\Http\Controllers\MachineController::class,
+	'coffee' => 'CoffeeController',
+	'images' => 'ImageController',
+	'locations' => 'LocationController',
+	'machines' => 'MachineController',
 ]);
