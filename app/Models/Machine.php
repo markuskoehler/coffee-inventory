@@ -15,4 +15,8 @@ class Machine extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    public function location() {
+    	return $this->belongsTo(Location::class);
+    }
 }
