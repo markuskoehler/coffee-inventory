@@ -100,6 +100,26 @@
                                 </li>
                             </ul>
                         </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false" aria-haspopup="true">
+                                Images <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{{url('images')}}">
+                                        View all
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{url('images/create')}}">
+                                        Create new
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     @endauth
                 </ul>
 
