@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Location;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Validator;
+use Validator;
 use Session;
 
 class LocationController extends Controller
@@ -46,10 +46,10 @@ class LocationController extends Controller
         // read more on validation at http://laravel.com/docs/validation
         $rules = [
             'name' => 'required',
-            'email' => 'required|email',
-            'nerd_level' => 'required|numeric|min:1'
+            //'email' => 'required|email',
+            //'nerd_level' => 'required|numeric|min:1'
         ];
-        $validator = $request->validate($rules);
+        $validator = Validator::make($request->all(), $rules);
 
         // process the login
         if ($validator->fails()) {
@@ -58,14 +58,16 @@ class LocationController extends Controller
                 ->withInput($request->except('password'));
         } else {
             // store
-            $nerd = new Location;
-            $nerd->name = $request->get('name');
-            $nerd->email = $request->get('email');
-            $nerd->nerd_level = $request->get('nerd_level');
-            $nerd->save();
+            $location = new Location;
+            $location->name = $request->get('name');
+            $location->address = $request->get('address');
+            $location->zip = $request->get('zip');
+            $location->place = $request->get('place');
+            $location->room = $request->get('room');
+            $location->save();
 
             // redirect
-            Session::flash('message', 'Successfully created nerd!');
+            Session::flash('message', 'Successfully created location!');
             return redirect()->to('locations');
         }
     }
@@ -73,45 +75,84 @@ class LocationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param \App\Models\Location $location
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function show($id)
+    public function show(Location $location)
     {
-        //
+        // show the view and pass the location to it
+        return view('user.locations.show')
+            ->with('location', $location);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param \App\Models\Location $location
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function edit($id)
+    public function edit(Location $location)
     {
-        //
+        // show the edit form and pass the location
+        return view('user.locations.edit')
+            ->with('location', $location);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param \App\Models\Location $location
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Location $location)
     {
-        //
+        // validate
+        // read more on validation at http://laravel.com/docs/validation
+        $rules = array(
+            'name'       => 'required',
+            //'email'      => 'required|email',
+            //'nerd_level' => 'required|numeric'
+        );
+        $validator = Validator::make($request->all(), $rules);
+
+        // process the login
+        if ($validator->fails()) {
+            return redirect()->to('locations/' . $location->id . '/edit')
+                ->withErrors($validator)
+                ->withInput(request()->except('password'));
+        } else {
+            // store
+            $location->name = $request->get('name');
+            $location->address = $request->get('address');
+            $location->zip = $request->get('zip');
+            $location->place = $request->get('place');
+            $location->room = $request->get('room');
+            $location->save();
+
+            // redirect
+            Session::flash('message', 'Successfully updated location!');
+            return redirect()->to('locations');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param \App\Models\Location $location
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function destroy($id)
+    public function destroy(Location $location)
     {
-        //
+        // delete
+        $location->delete();
+
+        // redirect
+        Session::flash('message', 'Successfully deleted the location!');
+        return redirect()->to('locations');
     }
 }
