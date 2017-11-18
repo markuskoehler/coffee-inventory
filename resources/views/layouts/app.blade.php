@@ -46,8 +46,13 @@
 
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="#">
-                                        Test
+                                    <a href="{{url('locations')}}">
+                                        View all
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{url('locations/create')}}">
+                                        Create new
                                     </a>
                                 </li>
                             </ul>
