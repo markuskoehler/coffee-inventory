@@ -12,6 +12,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- FontAwesome Code as received via eMail -->
+    <script src="https://use.fontawesome.com/0162b6a59d.js"></script>
 </head>
 <body>
 <div id="app">
@@ -66,8 +69,13 @@
 
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="#">
-                                        Test
+                                    <a href="{{url('machines')}}">
+                                        View all
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{url('machines/create')}}">
+                                        Create new
                                     </a>
                                 </li>
                             </ul>
@@ -81,8 +89,13 @@
 
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="#">
-                                        Test
+                                    <a href="{{url('coffee')}}">
+                                        View all
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{url('coffee/create')}}">
+                                        Create new
                                     </a>
                                 </li>
                             </ul>
