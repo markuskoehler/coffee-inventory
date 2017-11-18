@@ -15,7 +15,20 @@ class CreateMachinesTable extends Migration
     {
         Schema::create('machines', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('vendor')->nullable();
+            $table->string('brand');
+            $table->string('model');
+            $table->enum('type', ['beans', 'capsules', 'instant', 'pads']);
+            $table->date('bought_at')->nullable();
+            $table->unsignedInteger('location_id');
+            $table->softDeletes();
             $table->timestamps();
+        });
+
+        Schema::table('machines', function (Blueprint $table) {
+            $table->foreign('location_id')
+                ->references('id')
+                ->on('locations');
         });
     }
 
