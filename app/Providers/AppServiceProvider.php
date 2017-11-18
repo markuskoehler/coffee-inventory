@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
 	    // "bootstrap submit button with font-awesome icon" macro for Forms package
 	    Form::macro('faSubmit', function($type = 'default', $icon = '')
 	    {
-	    	return '<button class="btn btn-' . $type . '" type="submit"><i class="fa fa-' . $icon . '" aria-hidden="true"></i></button>';
+	    	return '<button class="btn btn-' . $type . '" type="submit"><i class="fa fa-' . $icon . '"></i></button>';
 	    });
     }
 
