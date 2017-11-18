@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>All the Locations <a class="btn btn-small btn-success pull-right" href="{{ URL::to('locations/create') }}"><i class="fa fa-plus" aria-hidden="true"></i></a></h1>
+        <h1>All the Locations <a class="btn btn-small btn-success pull-right" href="{{ URL::to('locations/create') }}"><i class="fa fa-plus" title="Add new"></i></a></h1>
 
         <!-- will be used to show any messages -->
         @if (Session::has('message'))
@@ -12,17 +12,15 @@
         <table class="table table-striped table-bordered">
             <thead>
             <tr>
-                <td>ID</td>
-                <td>Name</td>
-                <td>Address</td>
-                <td>Room</td>
-                <td>Actions</td>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Room</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             @foreach($locations as $key => $value)
                 <tr>
-                    <td>{{ $value->id }}</td>
                     <td>{{ $value->name }}</td>
                     <td>{{ $value->address }}<br>{{ $value->zip }} {{ $value->place }}</td>
                     <td>{{ $value->room }}</td>
@@ -39,10 +37,10 @@
                         {{ Form::close() }}
 
                         <!-- show the location (uses the show method found at GET /locations/{id} -->
-                        <a class="btn btn-small btn-success" href="{{ URL::to('locations/' . $value->id) }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <a class="btn btn-small btn-success" href="{{ URL::to('locations/' . $value->id) }}"><i class="fa fa-eye" title="View"></i></a>
 
                         <!-- edit this location (uses the edit method found at GET /locations/{id}/edit -->
-                        <a class="btn btn-small btn-info" href="{{ URL::to('locations/' . $value->id . '/edit') }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        <a class="btn btn-small btn-info" href="{{ URL::to('locations/' . $value->id . '/edit') }}"><i class="fa fa-pencil" title="Edit"></i></a>
 
                     </td>
                 </tr>
