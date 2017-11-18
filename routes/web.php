@@ -17,11 +17,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/profile', 'ProfileController@index')->name('profile');
+Route::group(['middleware' => 'auth'], function() {
+	Route::get('/profile', 'ProfileController@index')->name('profile');
 
-Route::resources([
-	'coffee' => 'CoffeeController',
-	'images' => 'ImageController',
-	'locations' => 'LocationController',
-	'machines' => 'MachineController',
-]);
+	Route::resources([
+		'coffee' => 'CoffeeController',
+		'images' => 'ImageController',
+		'locations' => 'LocationController',
+		'machines' => 'MachineController',
+	]);
+});
