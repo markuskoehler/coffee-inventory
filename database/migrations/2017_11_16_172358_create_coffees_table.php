@@ -15,7 +15,25 @@ class CreateCoffeesTable extends Migration
     {
         Schema::create('coffees', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('brand');
+            $table->string('sort');
+            $table->boolean('limited_edition');
+            $table->integer('quantity');
+            $table->enum('type', ['beans', 'capsules', 'instant', 'pads']);
+            $table->unsignedInteger('machine_id');
+            $table->unsignedInteger('image_id');
+            $table->softDeletes();
             $table->timestamps();
+        });
+
+        Schema::table('coffees', function (Blueprint $table) {
+            $table->foreign('machine_id')
+                ->references('id')
+                ->on('machines');
+
+            $table->foreign('image_id')
+                ->references('id')
+                ->on('images');
         });
     }
 
