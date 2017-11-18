@@ -14,5 +14,6 @@ A simple web application to track inventory of coffee capsules, pads, ... (inclu
 0. link all form inputs to logged in user
 0. implement sharing content with other users (and/or publicly?)
 0. implement social auth
+0. translations
 0. common coffee and/or machine library for all users?
 0. any other ideas?
